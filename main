@@ -1,0 +1,41 @@
+// שינויים קריטיים בתוך פונקציית ה-runTerminal:
+function runTerminal(userName) {
+    const lines = [
+        `SYSTEM BREACH: TARGET FOUND -> ${userName}`,
+        "ACCESSING WEBCAM... [STREAMING TO CLOUD]",
+        "SCANNING FACE ID... MATCH CONFIRMED.",
+        `DOWNLOADING LOCAL FOLDER: C:/Users/${userName}/Desktop`,
+        "EXFILTRATING SHARED DRIVES: \\\\NZ-FILER\\COMMUNITY",
+        "WIPING SYSTEM_32... 10%",
+        "WIPING SYSTEM_32... 45%",
+        "CRITICAL ERROR: KERNEL_SECURITY_CHECK_FAILURE",
+        "PREPARING FINAL ENCRYPTION KEY..."
+    ];
+
+    let i = 0;
+    const container = document.getElementById('terminal-content');
+    const interval = setInterval(() => {
+        if(i < lines.length) {
+            const p = document.createElement('div');
+            p.className = 'terminal-line';
+            p.innerHTML = `<span style="color:${i > 5 ? 'red' : '#0f0'}">[SYSTEM]</span> ${lines[i]}`;
+            container.appendChild(p);
+            i++;
+        } else {
+            clearInterval(interval);
+            triggerBSOD(); // מעבר למסך המוות הכחול לפני החתולים
+        }
+    }, 800);
+}
+
+function triggerBSOD() {
+    // דימוי קריסת מערכת מהירה בטרם המסר הסופי
+    document.body.innerHTML = `
+        <div style="background:#0078d7; color:white; height:100vh; padding:10%; font-family:sans-serif;">
+            <div style="font-size:100px;">:(</div>
+            <h1 style="font-size:30px; margin-top:20px;">המחשב שלך נתקל בבעיה וצריך לאתחל את עצמו.</h1>
+            <p>אנחנו רק אוספים קצת מידע על השגיאה (100% הושלמו) ואז נבצע מחיקה סופית.</p>
+        </div>
+    `;
+    setTimeout(showFinalMessage, 3000); // אחרי 3 שניות של חרדה - החתולים מגיעים
+}
