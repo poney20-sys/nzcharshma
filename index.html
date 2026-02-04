@@ -1,41 +1,45 @@
-// שינויים קריטיים בתוך פונקציית ה-runTerminal:
-function runTerminal(userName) {
-    const lines = [
-        `SYSTEM BREACH: TARGET FOUND -> ${userName}`,
-        "ACCESSING WEBCAM... [STREAMING TO CLOUD]",
-        "SCANNING FACE ID... MATCH CONFIRMED.",
-        `DOWNLOADING LOCAL FOLDER: C:/Users/${userName}/Desktop`,
-        "EXFILTRATING SHARED DRIVES: \\\\NZ-FILER\\COMMUNITY",
-        "WIPING SYSTEM_32... 10%",
-        "WIPING SYSTEM_32... 45%",
-        "CRITICAL ERROR: KERNEL_SECURITY_CHECK_FAILURE",
-        "PREPARING FINAL ENCRYPTION KEY..."
-    ];
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>מערכת רישום עירונית - נס ציונה</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&family=Courier+Prime:wght@400;700&display=swap');
 
-    let i = 0;
-    const container = document.getElementById('terminal-content');
-    const interval = setInterval(() => {
-        if(i < lines.length) {
-            const p = document.createElement('div');
-            p.className = 'terminal-line';
-            p.innerHTML = `<span style="color:${i > 5 ? 'red' : '#0f0'}">[SYSTEM]</span> ${lines[i]}`;
-            container.appendChild(p);
-            i++;
-        } else {
-            clearInterval(interval);
-            triggerBSOD(); // מעבר למסך המוות הכחול לפני החתולים
+        body, html { margin: 0; padding: 0; font-family: 'Assistant', sans-serif; overflow: hidden; background: #f8fafc; }
+        
+        #hack-overlay { 
+            display: none; background: black; color: #0f0; 
+            font-family: 'Courier Prime', monospace; z-index: 5000;
+            position: fixed; inset: 0; padding: 2rem;
         }
-    }, 800);
-}
 
-function triggerBSOD() {
-    // דימוי קריסת מערכת מהירה בטרם המסר הסופי
-    document.body.innerHTML = `
-        <div style="background:#0078d7; color:white; height:100vh; padding:10%; font-family:sans-serif;">
-            <div style="font-size:100px;">:(</div>
-            <h1 style="font-size:30px; margin-top:20px;">המחשב שלך נתקל בבעיה וצריך לאתחל את עצמו.</h1>
-            <p>אנחנו רק אוספים קצת מידע על השגיאה (100% הושלמו) ואז נבצע מחיקה סופית.</p>
-        </div>
-    `;
-    setTimeout(showFinalMessage, 3000); // אחרי 3 שניות של חרדה - החתולים מגיעים
-}
+        .terminal-line { margin-bottom: 8px; font-size: 1.1rem; opacity: 0; animation: fadeIn 0.1s forwards; }
+        @keyframes fadeIn { to { opacity: 1; } }
+
+        .glitch-text { animation: glitch 0.3s infinite; color: #ff0000; text-shadow: 2px 2px #550000; font-weight: 900; }
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            25% { transform: translate(-2px, 2px); }
+            50% { transform: translate(-2px, -2px); }
+            75% { transform: translate(2px, 2px); }
+            100% { transform: translate(0); }
+        }
+
+        .cat-mode { 
+            background-image: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueWp6emR4Z3JueWp6emR4Z3JueWp6emR4Z3JueWp6emR4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/mlvseq9nOe4A8/giphy.gif');
+            background-size: cover; background-position: center;
+        }
+
+        .bsod {
+            background: #0078d7; color: white; height: 100vh; padding: 10%; font-family: sans-serif; display: none;
+            position: fixed; inset: 0; z-index: 5500;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="landing-page" class="min-h-screen flex items-center justify-center p-4">
+        <div class="bg-white p-
